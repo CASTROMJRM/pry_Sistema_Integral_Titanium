@@ -1,0 +1,629 @@
+/* ============================================
+   SUSCRIPCIONES STYLES - CLASES ESPECÍFICAS
+   ============================================ */
+
+/* Hero de Suscripciones */
+.subs-hero {
+  position: relative;
+  padding: 8rem 1rem 4rem;
+  text-align: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  margin-top: 90px;
+  border-bottom: 3px solid #ef4444;
+}
+
+.subs-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.subs-title {
+  font-size: 72px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 2px;
+}
+
+.subs-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+/* Sección de Membresías - CORREGIDA */
+.subs-memberships-section {
+  padding: 6rem 1rem;
+  background: #f8fafc;
+}
+
+.subs-memberships-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.subs-memberships-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.subs-membership-card {
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 650px;
+}
+
+.subs-membership-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.subs-membership-card:hover::before {
+  transform: scaleX(1);
+}
+
+.subs-membership-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(239, 68, 68, 0.15);
+}
+
+.subs-membership-popular {
+  border: 2px solid #ef4444;
+  transform: scale(1.02);
+}
+
+.subs-membership-popular:hover {
+  transform: scale(1.02) translateY(-8px);
+}
+
+.subs-popular-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  z-index: 2;
+}
+
+.subs-membership-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.subs-membership-level {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  opacity: 1;
+}
+
+.subs-membership-name {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 2px;
+}
+
+.subs-membership-description {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.subs-membership-price {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.subs-price-currency {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.subs-price-amount {
+  font-family: "Bebas Neue", cursive;
+  font-size: 3.5rem;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.subs-price-duration {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.subs-membership-features {
+  list-style: none;
+  margin-bottom: 2rem;
+  text-align: left;
+  flex: 1;
+}
+
+.subs-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.subs-feature-item:last-child {
+  border-bottom: none;
+}
+
+.subs-feature-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.subs-membership-btn {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.subs-membership-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.subs-membership-btn:hover::before {
+  left: 100%;
+}
+
+.subs-membership-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.subs-btn-solid:hover {
+  background: #dc2626 !important;
+  border-color: #dc2626 !important;
+}
+
+.subs-btn-outline:hover {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #1a1a1a !important;
+}
+
+.subs-btn-arrow {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.subs-membership-btn:hover .subs-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Sección de Servicios Adicionales */
+.subs-services-section {
+  padding: 6rem 1rem;
+  background: #ffffff;
+}
+
+.subs-services-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.subs-services-header {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.subs-services-main-title {
+  font-size: 52px;
+  margin-bottom: 1rem;
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 2px;
+}
+
+.subs-services-main-subtitle {
+  font-family: "Inter", sans-serif;
+  color: #666666;
+  max-width: 768px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-size: 20px;
+}
+
+.subs-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2.5rem;
+}
+
+.subs-service-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.subs-service-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.subs-service-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.subs-service-card:hover .subs-service-icon {
+  transform: scale(1.2);
+}
+
+.subs-service-content {
+  flex: 1;
+}
+
+.subs-service-title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+.subs-service-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  color: #666666;
+  line-height: 1.6;
+}
+
+/* CTA de Suscripciones */
+.subs-cta {
+  padding: 6rem 1rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.subs-cta-card {
+  max-width: 1280px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  border-radius: 24px;
+  padding: 4rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.subs-cta-bg-1,
+.subs-cta-bg-2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.1;
+}
+
+.subs-cta-bg-1 {
+  width: 300px;
+  height: 300px;
+  background: #ef4444;
+  top: -100px;
+  right: -100px;
+}
+
+.subs-cta-bg-2 {
+  width: 200px;
+  height: 200px;
+  background: #ffffff;
+  bottom: -50px;
+  left: -50px;
+}
+
+.subs-cta-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.subs-cta-text {
+  flex: 1;
+}
+
+.subs-cta-title {
+  font-size: 48px;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  font-family: "Bebas Neue", cursive;
+}
+
+.subs-cta-title-sub {
+  display: block;
+  font-size: 24px;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.subs-cta-description {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  max-width: 500px;
+}
+
+.subs-cta-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subs-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.subs-benefit-icon {
+  width: 20px;
+  height: 20px;
+  color: #ef4444;
+}
+
+.subs-cta-buttons {
+  flex-shrink: 0;
+}
+
+.subs-cta-buttons-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.subs-cta-btn-primary,
+.subs-cta-btn-secondary {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  border: 2px solid #ef4444;
+}
+
+.subs-cta-btn-primary {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.subs-cta-btn-primary:hover {
+  background: #dc2626;
+  border-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+.subs-cta-btn-secondary {
+  background: transparent;
+  color: #ffffff;
+}
+
+.subs-cta-btn-secondary:hover {
+  background: #ef4444;
+  transform: translateY(-2px);
+}
+
+/* Responsive para Suscripciones */
+@media (max-width: 1024px) {
+  .subs-title {
+    font-size: 64px;
+  }
+
+  .subs-memberships-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .subs-membership-popular {
+    transform: none;
+  }
+
+  .subs-membership-popular:hover {
+    transform: translateY(-8px);
+  }
+
+  .subs-membership-card {
+    min-height: auto;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .subs-cta-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .subs-hero {
+    padding: 7rem 1rem 3rem;
+    margin-top: 80px;
+  }
+
+  .subs-title {
+    font-size: 48px;
+  }
+
+  .subs-subtitle {
+    font-size: 18px;
+  }
+
+  .subs-membership-card {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+
+  .subs-membership-name {
+    font-size: 1.75rem;
+  }
+
+  .subs-price-amount {
+    font-size: 3rem;
+  }
+
+  .subs-services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .subs-service-card {
+    padding: 2rem 1.5rem;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .subs-cta-card {
+    padding: 3rem 2rem;
+  }
+
+  .subs-cta-title {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subs-title {
+    font-size: 36px;
+  }
+
+  .subs-membership-card {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+
+  .subs-popular-badge {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+
+  .subs-cta-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .subs-cta-title {
+    font-size: 28px;
+  }
+}
+
+/* Utilidades globales que pueden necesitarse */
+.brush-text {
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-red {
+  color: #ef4444;
+}
+
+.brush-title {
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 2px;
+}
+
+.brush-btn {
+  font-family: "Bebas Neue", cursive;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
