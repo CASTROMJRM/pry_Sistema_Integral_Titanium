@@ -32,7 +32,8 @@ const products = [
     name: "Creatina Monohidratada",
     category: "CREATINA",
     price: 599,
-    image: "https://via.placeholder.com/300x300/ef4444/ffffff?text=CREATINA",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkUQ1BTH2hPodXcQLiVcE2c_0DpFUKI-Np_w&s",
     featured: true,
     description:
       "Creatina monohidratada 100% pura. Aumenta tu fuerza y resistencia durante los entrenamientos de alta intensidad.",
@@ -53,7 +54,8 @@ const products = [
     name: "Pre-Entreno Explosive",
     category: "PRE-ENTRENO",
     price: 699,
-    image: "https://via.placeholder.com/300x300/1a1a1a/ffffff?text=PRE+ENTRENO",
+    image:
+      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcT_z3Ucz0CPxiiaCFGcmKl4WfjtHIP2-JIz2mmvfOIzpaFbOCP6LFDsRR8U3yBNJDb2RQGypsENPiqKCeLw8afOa4RvYmzktsF38gokkV0xgisbK3nhriTI",
     featured: false,
     description:
       "Pre-entreno de máxima potencia con beta-alanina y cafeína. Energía sostenida sin crash.",
@@ -74,7 +76,8 @@ const products = [
     name: "BCAA Amino Ácidos",
     category: "INTRA-ENTRENO",
     price: 499,
-    image: "https://via.placeholder.com/300x300/ef4444/ffffff?text=BCAA",
+    image:
+      "https://cloudinary.images-iherb.com/image/upload/f_auto,q_auto:eco/images/opn/opn02036/l/48.jpg",
     featured: false,
     description:
       "BCAA 2:1:1 con electrolitos. Previene el catabolismo muscular durante entrenamientos intensos.",
@@ -96,7 +99,7 @@ const products = [
     category: "ROPA",
     price: 349,
     image:
-      "https://png.pngtree.com/png-vector/20231014/ourmid/pngtree-gray-sport-tank-top-mockup-hanging-png-file-png-image_10159020.png",
+      "https://www.nutrimind.net/images/news/analisis_quemadores_grasa/1.png",
     featured: true,
     description:
       "Tank top de alta calidad con tecnología de secado rápido. Ideal para entrenamientos intensos.",
@@ -161,7 +164,8 @@ const products = [
     name: "Quemador de Grasa",
     category: "CONTROL DE PESO",
     price: 649,
-    image: "https://via.placeholder.com/300x300/ef4444/ffffff?text=QUEMADOR",
+    image:
+      "https://www.nutrimind.net/images/news/analisis_quemadores_grasa/1.png",
     featured: false,
     description:
       "Termogénico avanzado con ingredientes naturales. Acelera el metabolismo y suprime el apetito.",
@@ -182,7 +186,8 @@ const products = [
     name: "Multivitamínico Premium",
     category: "SALUD • BIENESTAR",
     price: 399,
-    image: "https://via.placeholder.com/300x300/1a1a1a/ffffff?text=VITAMINAS",
+    image:
+      "https://www.nutrimind.net/images/news/analisis_quemadores_grasa/1.png",
     featured: true,
     description:
       "Multivitamínico completo con minerales esenciales. Soporte nutricional para atletas.",
@@ -203,7 +208,8 @@ const products = [
     name: "Hoodie Titanium",
     category: "ROPA",
     price: 599,
-    image: "https://via.placeholder.com/300x300/ef4444/ffffff?text=HOODIE",
+    image:
+      "https://www.nutrimind.net/images/news/analisis_quemadores_grasa/1.png",
     featured: false,
     description:
       "Hoodie premium con capucha y bolsillo canguro. Perfecto para entrenar en climas fríos.",
@@ -294,12 +300,26 @@ function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
   if (!isOpen) return null;
 
   return (
-    <div className="cart-overlay">
+    <div
+      className="cart-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cart-title"
+    >
       <div className="cart-sidebar">
         <div className="cart-header">
-          <h3>TU CARRITO</h3>
-          <button onClick={onClose} className="cart-close-btn">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 id="cart-title">TU CARRITO</h3>
+          <button
+            onClick={onClose}
+            className="cart-close-btn"
+            aria-label="Cerrar carrito"
+          >
+            <svg
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -313,7 +333,12 @@ function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
         <div className="cart-content">
           {cartItems.length === 0 ? (
             <div className="cart-empty">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -344,14 +369,16 @@ function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
                           onClick={() =>
                             onUpdateQuantity(item.id, item.quantity - 1)
                           }
+                          aria-label={`Reducir cantidad de ${item.name}`}
                         >
                           -
                         </button>
-                        <span>{item.quantity}</span>
+                        <span aria-live="polite">{item.quantity}</span>
                         <button
                           onClick={() =>
                             onUpdateQuantity(item.id, item.quantity + 1)
                           }
+                          aria-label={`Aumentar cantidad de ${item.name}`}
                         >
                           +
                         </button>
@@ -359,6 +386,7 @@ function Cart({ isOpen, onClose, cartItems, onUpdateQuantity, onRemoveItem }) {
                       <button
                         onClick={() => onRemoveItem(item.id)}
                         className="remove-item-btn"
+                        aria-label={`Eliminar ${item.name} del carrito`}
                       >
                         Eliminar
                       </button>
@@ -388,12 +416,26 @@ function ProductDetail({ isOpen, onClose, product, onAddToCart }) {
   if (!isOpen || !product) return null;
 
   return (
-    <div className="product-detail-overlay">
+    <div
+      className="product-detail-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="product-detail-title"
+    >
       <div className="product-detail-sidebar">
         <div className="product-detail-header">
-          <h3>DETALLES DEL PRODUCTO</h3>
-          <button onClick={onClose} className="product-detail-close-btn">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <h3 id="product-detail-title">DETALLES DEL PRODUCTO</h3>
+          <button
+            onClick={onClose}
+            className="product-detail-close-btn"
+            aria-label="Cerrar detalles del producto"
+          >
+            <svg
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -428,7 +470,11 @@ function ProductDetail({ isOpen, onClose, product, onAddToCart }) {
               <ul>
                 {product.features.map((feature, index) => (
                   <li key={index}>
-                    <svg fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -464,8 +510,14 @@ function ProductDetail({ isOpen, onClose, product, onAddToCart }) {
                   onAddToCart(product);
                   onClose();
                 }}
+                aria-label={`Agregar ${product.name} al carrito`}
               >
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -487,7 +539,6 @@ function ProductDetail({ isOpen, onClose, product, onAddToCart }) {
 export default function CatalogoPage() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState("Productos");
   const [selectedCategory, setSelectedCategory] = useState("TODOS");
   const [sortBy, setSortBy] = useState("RECOMENDADO");
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -537,7 +588,7 @@ export default function CatalogoPage() {
     }
 
     setFilteredProducts(filtered);
-    setCurrentPageNumber(1); // Reset to first page when filters change
+    setCurrentPageNumber(1);
   }, [selectedCategory, sortBy]);
 
   // Funciones del carrito
@@ -598,7 +649,7 @@ export default function CatalogoPage() {
   return (
     <div className="page-container">
       {/* Animated background elements */}
-      <div className="bg-animation">
+      <div className="bg-animation" aria-hidden="true">
         <div className="bg-grid" />
         <div className="bg-glow bg-glow-1" />
         <div className="bg-glow bg-glow-2" />
@@ -608,19 +659,20 @@ export default function CatalogoPage() {
       <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
         <div className="header-content">
           <div className="logo-container">
-            <Link to="/">
+            <Link to="/" aria-label="Ir al inicio de Titanium Sport Gym">
               <img src={Logo} alt="Titanium Sport Gym" className="logo-image" />
             </Link>
           </div>
 
-          <nav className="nav-desktop">
+          <nav className="nav-desktop" aria-label="Navegación principal">
             <div className="nav-main-links">
-              <a
-                href="/"
-                className="nav-link"
-                onClick={() => setCurrentPage("Inicio")}
-              >
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <Link to="/" className="nav-link">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -630,9 +682,14 @@ export default function CatalogoPage() {
                 </svg>
                 INICIO
                 <span className="nav-underline" />
-              </a>
-              <Link to="/catalogue" className="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              </Link>
+              <Link to="/catalogue" className="nav-link" aria-current="page">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -645,7 +702,12 @@ export default function CatalogoPage() {
               </Link>
 
               <Link to="/suscripciones" className="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -657,8 +719,13 @@ export default function CatalogoPage() {
                 <span className="nav-underline" />
               </Link>
 
-              <Link to="#" className="nav-link">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <Link to="/acerca-de" className="nav-link">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -672,12 +739,25 @@ export default function CatalogoPage() {
             </div>
 
             <div className="nav-action-links">
-              <div className="nav-divider" />
+              <div className="nav-divider" aria-hidden="true" />
               <button
                 className="cart-icon-btn"
                 onClick={() => setIsCartOpen(true)}
+                aria-label={`Abrir carrito de compras. ${
+                  cartItems.length > 0
+                    ? `${cartItems.reduce(
+                        (total, item) => total + item.quantity,
+                        0
+                      )} items en el carrito`
+                    : "Carrito vacío"
+                }`}
               >
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -686,7 +766,7 @@ export default function CatalogoPage() {
                   />
                 </svg>
                 {cartItems.length > 0 && (
-                  <span className="cart-badge">
+                  <span className="cart-badge" aria-hidden="true">
                     {cartItems.reduce(
                       (total, item) => total + item.quantity,
                       0
@@ -706,12 +786,20 @@ export default function CatalogoPage() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="mobile-menu-btn"
+            aria-label={
+              mobileMenuOpen
+                ? "Cerrar menú de navegación"
+                : "Abrir menú de navegación"
+            }
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
             <svg
               className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -725,32 +813,29 @@ export default function CatalogoPage() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="mobile-menu">
-            <nav className="mobile-nav">
-              <Link to="/" className="mobile-nav-link">
+          <div className="mobile-menu" id="mobile-menu" role="menu">
+            <nav className="mobile-nav" aria-label="Navegación móvil">
+              <Link to="/" className="mobile-nav-link" role="menuitem">
                 INICIO
               </Link>
-              <a
-                href="#"
+              <Link
+                to="/catalogue"
                 className="mobile-nav-link active"
-                onClick={() => setCurrentPage("Productos")}
+                role="menuitem"
+                aria-current="page"
               >
                 PRODUCTOS
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                to="/suscripciones"
                 className="mobile-nav-link"
-                onClick={() => setCurrentPage("Servicios")}
+                role="menuitem"
               >
-                SERVICIOS
-              </a>
-              <a
-                href="#"
-                className="mobile-nav-link"
-                onClick={() => setCurrentPage("Acerca de")}
-              >
+                SUSCRIPCIONES
+              </Link>
+              <Link to="/acerca-de" className="mobile-nav-link" role="menuitem">
                 ACERCA DE
-              </a>
+              </Link>
               <div className="mobile-nav-buttons">
                 <Link to="/register" className="slider-btn-outline">
                   SUSCRÍBETE
@@ -765,11 +850,16 @@ export default function CatalogoPage() {
       </header>
 
       {/* Breadcrumbs */}
-      <nav className="breadcrumbs">
+      <nav className="breadcrumbs" aria-label="Ruta de navegación">
         <ol className="breadcrumb-list">
           <li className="breadcrumb-item">
             <Link to="/" className="breadcrumb-link">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -777,20 +867,24 @@ export default function CatalogoPage() {
                   d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                 />
               </svg>
-              INICIO
+              <span className="sr-only">Ir a</span> INICIO
             </Link>
           </li>
-          <li className="breadcrumb-separator">/</li>
+          <li className="breadcrumb-separator" aria-hidden="true">
+            /
+          </li>
           <li className="breadcrumb-item">
-            <span className="breadcrumb-current">{currentPage}</span>
+            <span className="breadcrumb-current">PRODUCTOS</span>
           </li>
         </ol>
       </nav>
 
       {/* Hero Section del Catálogo */}
-      <section className="catalog-hero">
+      <section className="catalog-hero" aria-labelledby="catalog-title">
         <div className="catalog-hero-content">
-          <h1 className="catalog-title brush-text">TIENDA TITANIUM</h1>
+          <h1 id="catalog-title" className="catalog-title brush-text">
+            TIENDA TITANIUM
+          </h1>
           <p className="catalog-subtitle">
             Descubre nuestra selección premium de suplementos deportivos y ropa
             de entrenamiento diseñada para maximizar tu rendimiento y estilo
@@ -799,12 +893,18 @@ export default function CatalogoPage() {
       </section>
 
       {/* Filtros y Ordenamiento */}
-      <section className="catalog-filters">
+      <section className="catalog-filters" aria-labelledby="filters-title">
         <div className="filters-container">
           {/* Filtros por categoría */}
           <div className="category-filters">
-            <div className="filter-label">FILTRAR POR —</div>
-            <div className="category-buttons">
+            <div className="filter-label" id="filters-title">
+              FILTRAR POR —
+            </div>
+            <div
+              className="category-buttons"
+              role="group"
+              aria-labelledby="filters-title"
+            >
               {categories.map((category) => (
                 <button
                   key={category}
@@ -812,6 +912,7 @@ export default function CatalogoPage() {
                     selectedCategory === category ? "category-btn-active" : ""
                   }`}
                   onClick={() => setSelectedCategory(category)}
+                  aria-pressed={selectedCategory === category}
                 >
                   {category}
                 </button>
@@ -821,11 +922,15 @@ export default function CatalogoPage() {
 
           {/* Ordenamiento */}
           <div className="sort-filters">
-            <div className="filter-label">ORDENAR POR</div>
+            <label htmlFor="sort-select" className="filter-label">
+              ORDENAR POR
+            </label>
             <select
+              id="sort-select"
               className="sort-select"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
+              aria-label="Ordenar productos por"
             >
               {sortOptions.map((option) => (
                 <option key={option} value={option}>
@@ -838,22 +943,34 @@ export default function CatalogoPage() {
       </section>
 
       {/* Grid de Productos */}
-      <section className="products-grid-section">
+      <section
+        className="products-grid-section"
+        aria-labelledby="products-title"
+      >
         <div className="products-container">
+          <h2 id="products-title" className="sr-only">
+            Productos disponibles
+          </h2>
           <div className="products-grid">
             {currentProducts.map((product) => (
-              <div key={product.id} className="product-card">
+              <article key={product.id} className="product-card">
                 <div className="product-image-container">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="product-image"
                   />
-                  {product.featured && (
-                    <div className="product-badge">POPULAR</div>
-                  )}
-                  <button className="product-wishlist">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+
+                  <button
+                    className="product-wishlist"
+                    aria-label={`Agregar ${product.name} a favoritos`}
+                  >
+                    <svg
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -873,11 +990,13 @@ export default function CatalogoPage() {
                     <button
                       className="add-to-cart-btn"
                       onClick={() => addToCart(product)}
+                      aria-label={`Agregar ${product.name} al carrito`}
                     >
                       <svg
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
                         <path
                           strokeLinecap="round"
@@ -891,18 +1010,22 @@ export default function CatalogoPage() {
                     <button
                       className="view-details-btn"
                       onClick={() => openProductDetail(product)}
+                      aria-label={`Ver detalles de ${product.name}`}
                     >
                       VER DETALLES
                     </button>
                   </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
 
           {/* Paginación - Solo círculos */}
           {totalPages > 1 && (
-            <div className="pagination-simple">
+            <nav
+              className="pagination-simple"
+              aria-label="Paginación de productos"
+            >
               <div className="pagination-circles">
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map(
                   (number) => (
@@ -914,105 +1037,18 @@ export default function CatalogoPage() {
                           ? "pagination-circle-active"
                           : ""
                       }`}
+                      aria-label={`Ir a la página ${number}`}
+                      aria-current={
+                        currentPageNumber === number ? "page" : undefined
+                      }
                     >
                       {number}
                     </button>
                   )
                 )}
               </div>
-            </div>
+            </nav>
           )}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="catalog-cta">
-        <div className="cta-card-horizontal">
-          <div className="cta-bg-1" />
-          <div className="cta-bg-2" />
-
-          <div className="cta-content-horizontal">
-            <div className="cta-text-section">
-              <h3 className="cta-title brush-text">
-                ENVÍO GRATIS <span className="text-red">EN COMPRAS</span>
-                <span className="cta-title-sub">MAYORES A $599</span>
-              </h3>
-              <p className="cta-description">
-                Obtén envío gratuito en toda la república mexicana en compras
-                mayores a $599. También contamos con retiro en nuestro gimnasio
-                sin costo adicional y asesoría personalizada.
-              </p>
-
-              <div className="cta-benefits">
-                <div className="benefit-item">
-                  <svg
-                    className="benefit-icon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  ENVÍO GRATIS +$599
-                </div>
-                <div className="benefit-item">
-                  <svg
-                    className="benefit-icon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  RETIRO EN GIMNASIO
-                </div>
-                <div className="benefit-item">
-                  <svg
-                    className="benefit-icon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  ASESORÍA ESPECIALIZADA
-                </div>
-              </div>
-            </div>
-
-            <div className="cta-buttons-section">
-              <div className="cta-buttons-vertical">
-                <a href="#" className="cta-btn-primary brush-btn">
-                  VER OFERTAS
-                  <svg
-                    className="btn-arrow"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </a>
-                <a href="#" className="cta-btn-secondary">
-                  CONTACTAR ASESOR
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -1029,18 +1065,48 @@ export default function CatalogoPage() {
               <div className="social-links">
                 <span className="follow-text">SÍGUENOS</span>
                 <div className="social-icons">
-                  <a href="#" className="social-icon">
-                    <svg fill="currentColor" viewBox="0 0 24 24">
+                  <a
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Ftitanium_sport_gym%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExWUJKNHp6cXpTWmYyT21Sd3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6_OGr7V4aUwwy8dKz7C6CvZrIr2vuTF91SacRUAJbBW67hLnae-zeRBWfsGg_aem_pcUt103H1435pDGHtkbYbA&h=AT32gkkSUxNIk9T6iN2nfv4kVC6Z49jRtElrD3MNc_8gqorzOxwqFoYYAj_47_Us1HFVzZwliL8XxTKowQTOX93NViGrlUUJMhtUUR3V8E8ouAu9jH3dRr21hiY1f-B51EF0"
+                    className="social-icon"
+                    aria-label="Síguenos en Instagram"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
                       <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
                     </svg>
                   </a>
-                  <a href="#" className="social-icon">
-                    <svg fill="currentColor" viewBox="0 0 24 24">
+                  <a
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Ftitanium_sport_gym%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExWUJKNHp6cXpTWmYyT21Sd3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6_OGr7V4aUwwy8dKz7C6CvZrIr2vuTF91SacRUAJbBW67hLnae-zeRBWfsGg_aem_pcUt103H1435pDGHtkbYbA&h=AT32gkkSUxNIk9T6iN2nfv4kVC6Z49jRtElrD3MNc_8gqorzOxwqFoYYAj_47_Us1HFVzZwliL8XxTKowQTOX93NViGrlUUJMhtUUR3V8E8ouAu9jH3dRr21hiY1f-B51EF0"
+                    className="social-icon"
+                    aria-label="Síguenos en Twitter"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
                       <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
                     </svg>
                   </a>
-                  <a href="#" className="social-icon">
-                    <svg fill="currentColor" viewBox="0 0 24 24">
+                  <a
+                    href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Ftitanium_sport_gym%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExWUJKNHp6cXpTWmYyT21Sd3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6_OGr7V4aUwwy8dKz7C6CvZrIr2vuTF91SacRUAJbBW67hLnae-zeRBWfsGg_aem_pcUt103H1435pDGHtkbYbA&h=AT32gkkSUxNIk9T6iN2nfv4kVC6Z49jRtElrD3MNc_8gqorzOxwqFoYYAj_47_Us1HFVzZwliL8XxTKowQTOX93NViGrlUUJMhtUUR3V8E8ouAu9jH3dRr21hiY1f-B51EF0"
+                    className="social-icon"
+                    aria-label="Síguenos en Pinterest"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <svg
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
                       <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.042-3.441.219-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.017z" />
                     </svg>
                   </a>
@@ -1053,17 +1119,17 @@ export default function CatalogoPage() {
                 <h4 className="footer-column-title">Titanium Sport Gym</h4>
                 <ul className="footer-links">
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/quienes-somos" className="footer-link">
                       Quiénes somos
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/contacto" className="footer-link">
                       Contáctanos
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/aviso-privacidad" className="footer-link">
                       Aviso de Privacidad
                     </a>
                   </li>
@@ -1074,22 +1140,25 @@ export default function CatalogoPage() {
                 <h4 className="footer-column-title">Productos</h4>
                 <ul className="footer-links">
                   <li>
-                    <a href="#" className="footer-link">
+                    <Link
+                      to="/catalogue?category=PROTEÍNA"
+                      className="footer-link"
+                    >
                       Suplementos
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <Link to="/catalogue?category=ROPA" className="footer-link">
                       Ropa Deportiva
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/accesorios" className="footer-link">
                       Accesorios
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/ofertas" className="footer-link">
                       Ofertas Especiales
                     </a>
                   </li>
@@ -1100,22 +1169,22 @@ export default function CatalogoPage() {
                 <h4 className="footer-column-title">Servicios</h4>
                 <ul className="footer-links">
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/envios" className="footer-link">
                       Envíos y Entregas
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/garantias" className="footer-link">
                       Garantías
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/faq" className="footer-link">
                       Preguntas Frecuentes
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="footer-link">
+                    <a href="/trabaja-con-nosotros" className="footer-link">
                       Trabaja con nosotros
                     </a>
                   </li>
@@ -1158,4 +1227,3 @@ export default function CatalogoPage() {
     </div>
   );
 }
-  

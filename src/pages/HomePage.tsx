@@ -163,7 +163,7 @@ export default function HomePage() {
                 <span className="nav-underline" />
               </Link>
 
-              <Link to="#" className="nav-link">
+              <Link to="/AboutPage" className="nav-link">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"

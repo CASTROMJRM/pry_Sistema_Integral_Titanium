@@ -297,19 +297,68 @@ export default function ServicesPage() {
         </ol>
       </nav>
 
-      {/* Hero Section de Servicios */}
-      <section className="subs-hero">
-        <div className="subs-hero-content">
-          <h1 className="subs-title brush-text">MEMBRESÍAS TITANIUM</h1>
-          <p className="subs-subtitle">
-            Descubre el plan perfecto para tu transformación. Desde el acceso
-            básico hasta la experiencia premium completa, tenemos lo que
-            necesitas para alcanzar tus metas.
-          </p>
+      {/* Hero Section Compacta */}
+      <section className="subs-hero-compact">
+        <div className="subs-hero-content-compact">
+          <div className="subs-hero-text">
+            <h1 className="subs-title-compact brush-text">MEMBRESÍAS TITANIUM</h1>
+            <p className="subs-subtitle-compact">
+              Elige el plan perfecto para tu transformación. 
+              <span className="highlight-red"> Primera semana GRATIS</span> en todos los planes.
+            </p>
+          </div>
+          <div className="subs-hero-cta">
+            <a href="#planes" className="subs-hero-btn">
+              VER PLANES
+              <svg
+                className="subs-btn-arrow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div className="subs-hero-benefits">
+          <div className="benefit-item">
+            <svg className="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span>Sin contratos</span>
+          </div>
+          <div className="benefit-item">
+            <svg className="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span>Cancelación gratuita</span>
+          </div>
+          <div className="benefit-item">
+            <svg className="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            <span>Asesoría incluida</span>
+          </div>
         </div>
       </section>
 
-      <section className="subs-memberships-section">
+      {/* Sección de Planes (PRIMERA SECCIÓN VISIBLE) */}
+      <section id="planes" className="subs-memberships-section">
+        <div className="section-header">
+          <h2 className="section-title brush-title">
+            ELIGE TU <span className="text-red">PLAN IDEAL</span>
+          </h2>
+          <p className="section-subtitle">
+            Tres opciones diseñadas para cada nivel de compromiso fitness
+          </p>
+        </div>
+        
         <div className="subs-memberships-container">
           <div className="subs-memberships-grid">
             {memberships.map((membership) => (
@@ -471,120 +520,111 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-      
-      {/* Servicios Adicionales */}
-      <section className="subs-services-section">
-        <div className="subs-services-container">
-          <div className="subs-services-header">
-            <h2 className="subs-services-main-title brush-title">
-              SERVICIOS <span className="text-red">TITANIUM</span>
-            </h2>
-            <p className="subs-services-main-subtitle">
-              Más que un gimnasio, somos tu partner en el journey fitness.
-              Contamos con todo lo necesario para tu transformación completa.
+
+      {/* Banner de Promoción (ANTES de los servicios) */}
+      <section className="promo-banner">
+        <div className="promo-content">
+          <div className="promo-text">
+            <h3 className="promo-title brush-text">
+              <span className="text-red">1 SEMANA GRATIS</span> + 20% DESCUENTO
+            </h3>
+            <p className="promo-subtitle">
+              Al suscribirte hoy mismo. Oferta válida por tiempo limitado.
             </p>
           </div>
-
-          <div className="subs-services-grid">
-            {services.map((service, index) => (
-              <div key={index} className="subs-service-card">
-                <div className="subs-service-icon">{service.icon}</div>
-                <div className="subs-service-content">
-                  <h3 className="subs-service-title">{service.title}</h3>
-                  <p className="subs-service-desc">{service.desc}</p>
-                </div>
-              </div>
-            ))}
+          <div className="promo-cta">
+            <Link to="/register" className="promo-btn-primary">
+              APROVECHAR OFERTA
+              <svg
+                className="promo-btn-arrow"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
+              </svg>
+            </Link>
+            <a href="tel:+521234567890" className="promo-btn-secondary">
+              <svg fill="currentColor" viewBox="0 0 20 20">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+              </svg>
+              LLAMAR AHORA
+            </a>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="subs-cta">
-        <div className="subs-cta-card">
-          <div className="subs-cta-bg-1" />
-          <div className="subs-cta-bg-2" />
+      {/* Servicios Adicionales */}
+      <section className="subs-services-section">
+        <div className="section-header">
+          <h2 className="section-title brush-title">
+            SERVICIOS <span className="text-red">TITANIUM</span>
+          </h2>
+          <p className="section-subtitle">
+            Más que un gimnasio, somos tu partner en el journey fitness.
+          </p>
+        </div>
 
-          <div className="subs-cta-content">
-            <div className="subs-cta-text">
-              <h3 className="subs-cta-title brush-text">
-                PRIMERA SEMANA <span className="text-red">GRATIS</span>
-                <span className="subs-cta-title-sub">EN TODOS LOS PLANES</span>
-              </h3>
-              <p className="subs-cta-description">
-                Experimenta todo lo que Titanium tiene para ofrecerte sin
-                compromiso. Tu primera semana es completamente gratis en
-                cualquier membresía. Sin contratos, sin permanencias.
-              </p>
-
-              <div className="subs-cta-benefits">
-                <div className="subs-benefit-item">
-                  <svg
-                    className="subs-benefit-icon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  1 SEMANA GRATIS
-                </div>
-                <div className="subs-benefit-item">
-                  <svg
-                    className="subs-benefit-icon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  SIN CONTRATOS
-                </div>
-                <div className="subs-benefit-item">
-                  <svg
-                    className="subs-benefit-icon"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  ASESORÍA INCLUIDA
-                </div>
+        <div className="subs-services-grid">
+          {services.map((service, index) => (
+            <div key={index} className="subs-service-card">
+              <div className="subs-service-icon">{service.icon}</div>
+              <div className="subs-service-content">
+                <h3 className="subs-service-title">{service.title}</h3>
+                <p className="subs-service-desc">{service.desc}</p>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            <div className="subs-cta-buttons">
-              <div className="subs-cta-buttons-vertical">
-                <a href="#" className="subs-cta-btn-primary brush-btn">
-                  AGENDAR VISITA
-                  <svg
-                    className="subs-btn-arrow"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    />
-                  </svg>
-                </a>
-                <a href="#" className="subs-cta-btn-secondary">
-                  LLAMAR AHORA
-                </a>
-              </div>
+      {/* FAQ Section */}
+      <section className="faq-section">
+        <div className="section-header">
+          <h2 className="section-title brush-title">
+            PREGUNTAS <span className="text-red">FRECUENTES</span>
+          </h2>
+        </div>
+        
+        <div className="faq-container">
+          <div className="faq-item">
+            <button className="faq-question">
+              ¿Puedo cambiar de plan después?
+              <svg className="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="faq-answer">
+              Sí, puedes cambiar a cualquier plan en cualquier momento sin costos adicionales.
+            </div>
+          </div>
+          
+          <div className="faq-item">
+            <button className="faq-question">
+              ¿Cómo funciona la semana gratis?
+              <svg className="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="faq-answer">
+              La primera semana es completamente gratis. Si decides quedarte, se aplicará el pago mensual a partir de la segunda semana.
+            </div>
+          </div>
+          
+          <div className="faq-item">
+            <button className="faq-question">
+              ¿Hay contratos de permanencia?
+              <svg className="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="faq-answer">
+              No, todos nuestros planes son mensuales sin contratos de permanencia. Puedes cancelar en cualquier momento.
             </div>
           </div>
         </div>
