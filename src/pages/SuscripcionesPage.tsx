@@ -37,8 +37,6 @@ const memberships = [
       "Área cardio completo",
       "App Titanium premium",
       "2 sesiones con entrenador",
-      "Evaluación física mensual",
-      "Estacionamiento preferente",
     ],
     popular: true,
     description: "El equilibrio perfecto entre calidad y precio",
@@ -57,8 +55,6 @@ const memberships = [
       "Nutricionista certificado",
       "Plan alimenticio personalizado",
       "Sesiones ilimitadas con coach",
-      "Invitados gratis (2 por mes)",
-      "Lockers premium",
     ],
     popular: false,
     description: "Experiencia fitness de élite completa",
@@ -192,7 +188,7 @@ export default function ServicesPage() {
                 <span className="nav-underline" />
               </Link>
 
-              <Link to="#" className="nav-link">
+              <Link to="/AboutPage" className="nav-link">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
@@ -274,8 +270,8 @@ export default function ServicesPage() {
         )}
       </header>
 
-      {/* Breadcrumbs */}
-      <nav className="breadcrumbs">
+      {/* Breadcrumbs - CENTRADOS */}
+      <nav className="breadcrumbs breadcrumbs-centered">
         <ol className="breadcrumb-list">
           <li className="breadcrumb-item">
             <Link to="/" className="breadcrumb-link">
@@ -292,7 +288,7 @@ export default function ServicesPage() {
           </li>
           <li className="breadcrumb-separator">/</li>
           <li className="breadcrumb-item">
-            <span className="breadcrumb-current">{currentPage}</span>
+            <span className="breadcrumb-current">MEMBRESÍAS</span>
           </li>
         </ol>
       </nav>
@@ -301,10 +297,13 @@ export default function ServicesPage() {
       <section className="subs-hero-compact">
         <div className="subs-hero-content-compact">
           <div className="subs-hero-text">
-            <h1 className="subs-title-compact brush-text">MEMBRESÍAS TITANIUM</h1>
+            <h1 className="subs-title-compact brush-text">
+              MEMBRESÍAS TITANIUM
+            </h1>
             <p className="subs-subtitle-compact">
-              Elige el plan perfecto para tu transformación. 
-              <span className="highlight-red"> Primera semana GRATIS</span> en todos los planes.
+              Elige el plan perfecto para tu transformación.
+              <span className="highlight-red"> Primera semana GRATIS</span> en
+              todos los planes.
             </p>
           </div>
           <div className="subs-hero-cta">
@@ -328,20 +327,44 @@ export default function ServicesPage() {
         </div>
         <div className="subs-hero-benefits">
           <div className="benefit-item">
-            <svg className="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <svg
+              className="benefit-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
             <span>Sin contratos</span>
           </div>
           <div className="benefit-item">
-            <svg className="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <svg
+              className="benefit-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
             <span>Cancelación gratuita</span>
           </div>
           <div className="benefit-item">
-            <svg className="benefit-icon" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            <svg
+              className="benefit-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
             </svg>
             <span>Asesoría incluida</span>
           </div>
@@ -358,7 +381,7 @@ export default function ServicesPage() {
             Tres opciones diseñadas para cada nivel de compromiso fitness
           </p>
         </div>
-        
+
         <div className="subs-memberships-container">
           <div className="subs-memberships-grid">
             {memberships.map((membership) => (
@@ -590,41 +613,74 @@ export default function ServicesPage() {
             PREGUNTAS <span className="text-red">FRECUENTES</span>
           </h2>
         </div>
-        
+
         <div className="faq-container">
           <div className="faq-item">
             <button className="faq-question">
               ¿Puedo cambiar de plan después?
-              <svg className="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="faq-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
             <div className="faq-answer">
-              Sí, puedes cambiar a cualquier plan en cualquier momento sin costos adicionales.
+              Sí, puedes cambiar a cualquier plan en cualquier momento sin
+              costos adicionales.
             </div>
           </div>
-          
+
           <div className="faq-item">
             <button className="faq-question">
               ¿Cómo funciona la semana gratis?
-              <svg className="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="faq-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
             <div className="faq-answer">
-              La primera semana es completamente gratis. Si decides quedarte, se aplicará el pago mensual a partir de la segunda semana.
+              La primera semana es completamente gratis. Si decides quedarte, se
+              aplicará el pago mensual a partir de la segunda semana.
             </div>
           </div>
-          
+
           <div className="faq-item">
             <button className="faq-question">
               ¿Hay contratos de permanencia?
-              <svg className="faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className="faq-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
             <div className="faq-answer">
-              No, todos nuestros planes son mensuales sin contratos de permanencia. Puedes cancelar en cualquier momento.
+              No, todos nuestros planes son mensuales sin contratos de
+              permanencia. Puedes cancelar en cualquier momento.
             </div>
           </div>
         </div>

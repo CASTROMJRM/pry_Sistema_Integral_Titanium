@@ -14,12 +14,84 @@
   --shadow-red: rgba(239, 68, 68, 0.15);
 }
 
+/* ============================================
+   BREADCRUMBS CENTRADOS
+   ============================================ */
+.breadcrumbs {
+  position: relative;
+  padding: 1rem 1rem;
+  background: var(--primary-light);
+  border-bottom: 1px solid var(--gray-medium);
+  margin-top: 90px;
+}
+
+.breadcrumbs-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 0.5rem;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.breadcrumb-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  color: var(--gray-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.breadcrumb-link:hover {
+  color: var(--primary-red);
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.breadcrumb-link svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+}
+
+.breadcrumb-separator {
+  color: var(--gray-medium);
+  font-size: 0.875rem;
+}
+
+.breadcrumb-current {
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(239, 68, 68, 0.05);
+}
+
 /* Hero de Suscripciones Compacto */
 .subs-hero-compact {
   position: relative;
   padding: 3rem 1rem 2rem;
   background: linear-gradient(135deg, var(--primary-dark) 0%, #2d2d2d 100%);
-  margin-top: 90px;
   border-bottom: 3px solid var(--primary-red);
 }
 
@@ -128,7 +200,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  align-items: stretch;
+  align-items: start;
 }
 
 @media (max-width: 1024px) {
@@ -140,6 +212,8 @@
 @media (max-width: 768px) {
   .subs-memberships-grid {
     grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
   }
 }
 
@@ -152,8 +226,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: auto;
+  min-height: 550px;
   border: 1px solid var(--gray-medium);
+  background: var(--primary-light);
+  text-align: center;
 }
 
 .subs-membership-card:hover {
@@ -203,6 +280,10 @@
   font-family: "Bebas Neue", cursive;
   letter-spacing: 1px;
   color: var(--primary-dark);
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .subs-membership-description {
@@ -210,6 +291,8 @@
   font-size: 0.95rem;
   color: var(--gray-dark);
   line-height: 1.5;
+  margin-bottom: 1rem;
+  min-height: 45px;
 }
 
 .subs-membership-price {
@@ -219,6 +302,7 @@
   justify-content: center;
   gap: 0.25rem;
   flex-shrink: 0;
+  min-height: 70px;
 }
 
 .subs-price-currency {
@@ -242,12 +326,14 @@
   color: var(--gray-dark);
 }
 
+/* CORRECCIÓN: QUITAR LAS LÍNEAS DE LAS CARACTERÍSTICAS */
 .subs-membership-features {
   list-style: none;
   margin-bottom: 2rem;
   text-align: left;
   flex: 1;
   padding: 0;
+  min-height: 200px;
 }
 
 .subs-feature-item {
@@ -258,9 +344,13 @@
   font-family: "Inter", sans-serif;
   font-size: 0.9rem;
   color: var(--primary-dark);
-  border-bottom: 1px solid var(--gray-medium);
+  /* LÍNEA ELIMINADA */
+  border-bottom: none;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
 }
 
+/* Eliminar también el borde del último item */
 .subs-feature-item:last-child {
   border-bottom: none;
 }
@@ -292,22 +382,44 @@
   background: var(--primary-dark);
   color: var(--primary-light);
   text-decoration: none;
+  position: relative;
 }
 
+/* Estado hover (ratón encima) */
 .subs-membership-btn:hover {
   background: transparent;
   color: var(--primary-dark);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estado active (presionado) */
+.subs-membership-btn:active {
+  transform: translateY(0);
+  background: var(--primary-red);
+  border-color: var(--primary-red);
+  color: var(--primary-light);
+}
+
+/* Estado focus (enfoque con teclado) */
+.subs-membership-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
 }
 
 .subs-btn-arrow {
   width: 16px;
   height: 16px;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .subs-membership-btn:hover .subs-btn-arrow {
   transform: translateX(4px);
+  color: var(--primary-dark);
+}
+
+.subs-membership-btn:active .subs-btn-arrow {
+  color: var(--primary-light);
 }
 
 /* Banner de Promoción */
@@ -530,6 +642,7 @@
 .section-header {
   text-align: center;
   margin-bottom: 3rem;
+  width: 100%;
 }
 
 .section-title {
@@ -538,6 +651,8 @@
   font-family: "Bebas Neue", cursive;
   letter-spacing: 2px;
   color: var(--primary-dark);
+  text-align: center;
+  width: 100%;
 }
 
 .section-subtitle {
@@ -547,6 +662,64 @@
   margin: 0 auto;
   line-height: 1.6;
   font-size: 1.1rem;
+}
+
+/* Estilos específicos para texto con fondo blanco */
+.subs-membership-card[style*="background: #ffffff"] .subs-membership-name,
+.subs-membership-card[style*="background: #ffffff"]
+  .subs-membership-description,
+.subs-membership-card[style*="background: #ffffff"] .subs-price-amount,
+.subs-membership-card[style*="background: #ffffff"] .subs-price-currency,
+.subs-membership-card[style*="background: #ffffff"] .subs-price-duration,
+.subs-membership-card[style*="background: #ffffff"] .subs-feature-item span {
+  color: var(--primary-dark) !important;
+}
+
+.subs-membership-card[style*="background: #ffffff"] .subs-feature-icon {
+  color: var(--primary-red) !important;
+}
+
+.subs-membership-card[style*="background: #ffffff"] .subs-membership-btn {
+  background: var(--primary-dark);
+  color: var(--primary-light);
+  border-color: var(--primary-dark);
+}
+
+.subs-membership-card[style*="background: #ffffff"] .subs-membership-btn:hover {
+  background: transparent;
+  color: var(--primary-dark);
+}
+
+/* Alineación vertical mejorada */
+.subs-memberships-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subs-memberships-section {
+  padding: 4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ANIMACIÓN DE CARGA PARA BOTONES */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+.subs-membership-btn.loading {
+  animation: pulse 1.5s infinite;
+  cursor: wait;
 }
 
 /* Responsive */
@@ -570,6 +743,7 @@
 
   .subs-membership-card {
     padding: 1.5rem;
+    min-height: auto;
   }
 
   .subs-membership-name {
@@ -578,6 +752,18 @@
 
   .subs-price-amount {
     font-size: 2.5rem;
+  }
+
+  .subs-membership-features {
+    min-height: auto;
+  }
+
+  .section-title {
+    padding: 0 1rem;
+  }
+
+  .section-subtitle {
+    padding: 0 1rem;
   }
 }
 
@@ -598,350 +784,20 @@
   .section-title {
     font-size: 1.75rem;
   }
-  /* ============================================
-   CORRECCIONES ESPECÍFICAS
-   ============================================ */
+}
 
-  /* 1. CENTRAR EL TÍTULO "ELIGE TU PLAN IDEAL" */
-  .section-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    width: 100%;
-  }
-
-  .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-family: "Bebas Neue", cursive;
-    letter-spacing: 2px;
-    color: var(--primary-dark);
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Asegurar que el brush-title también esté centrado */
-  .brush-title {
-    display: block;
-    text-align: center;
-    width: 100%;
-  }
-
-  /* 2. ESTADOS DE LOS BOTONES (hover, active, focus) */
-  .subs-membership-btn {
-    width: 100%;
-    padding: 0.875rem 1.5rem;
-    border-radius: 8px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: 2px solid var(--primary-dark);
-    background: var(--primary-dark);
-    color: var(--primary-light);
-    text-decoration: none;
-    position: relative;
-  }
-
-  /* Estado hover (ratón encima) */
-  .subs-membership-btn:hover {
-    background: transparent;
-    color: var(--primary-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Estado active (presionado) */
-  .subs-membership-btn:active {
-    transform: translateY(0);
-    background: var(--primary-red);
-    border-color: var(--primary-red);
-    color: var(--primary-light);
-  }
-
-  /* Estado focus (enfoque con teclado) */
-  .subs-membership-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.3);
-  }
-
-  /* Estado visited (ya visitado) */
-  .subs-membership-btn:visited {
-    background: var(--primary-dark);
-    color: var(--primary-light);
-  }
-
-  /* Flecha de los botones */
-  .subs-btn-arrow {
-    width: 16px;
-    height: 16px;
-    transition: all 0.3s ease;
-  }
-
-  .subs-membership-btn:hover .subs-btn-arrow {
-    transform: translateX(4px);
-    color: var(--primary-dark);
-  }
-
-  .subs-membership-btn:active .subs-btn-arrow {
-    color: var(--primary-light);
-  }
-
-  /* 3. MEJORAR EL DISEÑO DE LAS TARJETAS */
-  .subs-memberships-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    align-items: start; /* Cambiado de stretch a start */
-  }
-
-  @media (max-width: 1024px) {
-    .subs-memberships-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .subs-memberships-grid {
-      grid-template-columns: 1fr;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-  }
-
+/* MEJORAS RESPONSIVE */
+@media (max-width: 1024px) {
   .subs-membership-card {
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px var(--shadow-light);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    height: auto; /* Cambiado de 100% a auto */
-    min-height: 550px;
-    border: 1px solid var(--gray-medium);
-    background: var(--primary-light);
-    text-align: center;
-  }
-
-  /* Asegurar que todas las tarjetas tengan la misma altura */
-  .subs-memberships-grid > * {
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Contenido de las tarjetas más compacto */
-  .subs-membership-header {
-    margin-bottom: 1.5rem;
-    flex-shrink: 0;
+    min-height: 500px;
   }
 
   .subs-membership-name {
-    font-size: 1.75rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.2;
-    font-family: "Bebas Neue", cursive;
-    letter-spacing: 1px;
-    color: var(--primary-dark);
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.5rem;
+    min-height: 50px;
   }
 
-  .subs-membership-description {
-    font-family: "Inter", sans-serif;
-    font-size: 0.95rem;
-    color: var(--gray-dark);
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    min-height: 45px;
-  }
-
-  .subs-membership-price {
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 0.25rem;
-    flex-shrink: 0;
-    min-height: 70px;
-  }
-
-  .subs-membership-features {
-    list-style: none;
-    margin-bottom: 2rem;
-    text-align: left;
-    flex: 1;
-    padding: 0;
-    min-height: 200px;
-  }
-
-  .subs-feature-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
-    color: var(--primary-dark);
-    border-bottom: 1px solid var(--gray-medium);
-    line-height: 1.4;
-  }
-
-  /* 4. MEJORAS VISUALES ADICIONALES */
-
-  /* Asegurar que el texto del nivel "MÁS POPULAR" sea visible */
-  .subs-membership-level {
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
-    color: var(--primary-red);
-    display: block;
-  }
-
-  /* Badge para tarjeta popular más visible */
-  .subs-membership-popular {
-    border-color: var(--primary-red);
-    position: relative;
-  }
-
-  .subs-popular-badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--primary-red);
-    color: var(--primary-light);
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-family: "Poppins", sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    z-index: 2;
-  }
-
-  /* 5. CORRECCIÓN DE LOS ENLACES DE SUSCRIPCIONES EN EL NAV */
-  .nav-link {
-    position: relative;
-    text-decoration: none;
-    color: var(--primary-dark);
-    transition: color 0.3s ease;
-  }
-
-  .nav-link.active {
-    color: var(--primary-red);
-  }
-
-  .nav-link.active .nav-underline {
-    transform: scaleX(1);
-    background: var(--primary-red);
-  }
-
-  /* 6. ANIMACIÓN DE CARGA PARA BOTONES */
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
-    }
-    70% {
-      box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-    }
-  }
-
-  .subs-membership-btn.loading {
-    animation: pulse 1.5s infinite;
-    cursor: wait;
-  }
-
-  /* 7. MEJORAS RESPONSIVE */
-  @media (max-width: 1024px) {
-    .subs-membership-card {
-      min-height: 500px;
-    }
-
-    .subs-membership-name {
-      font-size: 1.5rem;
-      min-height: 50px;
-    }
-
-    .subs-price-amount {
-      font-size: 2.5rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .subs-membership-card {
-      min-height: auto;
-      padding: 1.5rem;
-    }
-
-    .subs-membership-features {
-      min-height: auto;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      padding: 0 1rem;
-    }
-
-    .section-subtitle {
-      padding: 0 1rem;
-    }
-  }
-
-  /* 8. CORRECCIÓN PARA TEXTO CON FONDO BLANCO */
-  .subs-membership-card[style*="background: #ffffff"] .subs-membership-name,
-  .subs-membership-card[style*="background: #ffffff"]
-    .subs-membership-description,
-  .subs-membership-card[style*="background: #ffffff"] .subs-price-amount,
-  .subs-membership-card[style*="background: #ffffff"] .subs-price-currency,
-  .subs-membership-card[style*="background: #ffffff"] .subs-price-duration,
-  .subs-membership-card[style*="background: #ffffff"] .subs-feature-item span {
-    color: var(--primary-dark) !important;
-  }
-
-  .subs-membership-card[style*="background: #ffffff"] .subs-feature-icon {
-    color: var(--primary-red) !important;
-  }
-
-  .subs-membership-card[style*="background: #ffffff"] .subs-membership-btn {
-    background: var(--primary-dark);
-    color: var(--primary-light);
-    border-color: var(--primary-dark);
-  }
-
-  .subs-membership-card[style*="background: #ffffff"]
-    .subs-membership-btn:hover {
-    background: transparent;
-    color: var(--primary-dark);
-  }
-
-  /* 9. ALINEACIÓN VERTICAL MEJORADA */
-  .subs-memberships-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* 10. ESPACIADO CONSISTENTE */
-  .subs-memberships-section {
-    padding: 4rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .subs-price-amount {
+    font-size: 2.5rem;
   }
 }
