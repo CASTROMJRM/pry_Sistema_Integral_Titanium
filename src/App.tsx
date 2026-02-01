@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -8,7 +8,11 @@ import AboutPage from "./pages/AboutPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import PaymentPage from "./pages/PaymentPage";
 import ConfirmationPage from "./pages/ConfirmationPage";
-import AboutUs from "./pages/AboutePage";
+import AboutePage from "./pages/AboutePage";
+import NotFoundPage from "./pages/NotFoundPage";
+import Error500Page from "./pages/Page500";
+import Error400Page from "./pages/400";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -23,8 +27,10 @@ export default function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/confirmation" element={<ConfirmationPage />} />
         <Route path="/AboutPage" element={<AboutPage />} />
-        <Route path="/AboutUs" element={<AboutUs />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/AboutePage" element={<AboutePage />} />
+        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/500" element={<Error500Page />} />
+        <Route path="/400" element={<Error400Page />} />
       </Routes>
     </BrowserRouter>
   );

@@ -541,6 +541,7 @@ export default function CatalogoPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("TODOS");
   const [sortBy, setSortBy] = useState("RECOMENDADO");
+  const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -555,13 +556,23 @@ export default function CatalogoPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Filtrar productos cuando cambia la categoría o el orden
+  // Filtrar productos cuando cambia la categoría, búsqueda o el orden
   useEffect(() => {
     let filtered = products;
 
+    // Filtrar por búsqueda
+    if (searchQuery.trim() !== "") {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(product => 
+        product.name.toLowerCase().includes(query) ||
+        product.category.toLowerCase().includes(query) ||
+        product.description.toLowerCase().includes(query)
+      );
+    }
+
     // Filtrar por categoría
     if (selectedCategory !== "TODOS") {
-      filtered = products.filter(
+      filtered = filtered.filter(
         (product) => product.category === selectedCategory
       );
     }
@@ -589,7 +600,7 @@ export default function CatalogoPage() {
 
     setFilteredProducts(filtered);
     setCurrentPageNumber(1);
-  }, [selectedCategory, sortBy]);
+  }, [selectedCategory, sortBy, searchQuery]);
 
   // Funciones del carrito
   const addToCart = (product) => {
@@ -892,105 +903,109 @@ export default function CatalogoPage() {
         </div>
       </section>
 
-      {/* Filtros y Ordenamiento */}
-      <section className="catalog-filters" aria-labelledby="filters-title">
-        <div className="filters-container">
-          {/* Filtros por categoría */}
-          <div className="category-filters">
-            <div className="filter-label" id="filters-title">
-              FILTRAR POR —
-            </div>
-            <div
-              className="category-buttons"
-              role="group"
-              aria-labelledby="filters-title"
-            >
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className={`category-btn ${
-                    selectedCategory === category ? "category-btn-active" : ""
-                  }`}
-                  onClick={() => setSelectedCategory(category)}
-                  aria-pressed={selectedCategory === category}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Ordenamiento */}
-          <div className="sort-filters">
-            <label htmlFor="sort-select" className="filter-label">
-              ORDENAR POR
-            </label>
-            <select
-              id="sort-select"
-              className="sort-select"
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              aria-label="Ordenar productos por"
-            >
-              {sortOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </section>
-
-      {/* Grid de Productos */}
-      <section
-        className="products-grid-section"
-        aria-labelledby="products-title"
-      >
-        <div className="products-container">
-          <h2 id="products-title" className="sr-only">
-            Productos disponibles
-          </h2>
-          <div className="products-grid">
-            {currentProducts.map((product) => (
-              <article key={product.id} className="product-card">
-                <div className="product-image-container">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="product-image"
-                  />
-
-                  <button
-                    className="product-wishlist"
-                    aria-label={`Agregar ${product.name} a favoritos`}
+      {/* Layout principal con filtros a la izquierda */}
+      <main className="catalog-layout">
+        
+        {/* Columna izquierda - Filtros y Búsqueda */}
+        <aside className="catalog-filters-sidebar">
+          <div className="filters-sidebar-container">
+            
+            {/* Búsqueda */}
+            <div className="search-filter-section">
+              <h3 className="filter-section-title">BUSCAR PRODUCTOS</h3>
+              <div className="search-input-container">
+                <svg className="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input
+                  type="text"
+                  className="search-filter-input"
+                  placeholder="Buscar por nombre, categoría..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  aria-label="Buscar productos"
+                />
+                {searchQuery && (
+                  <button 
+                    className="clear-search-btn" 
+                    onClick={() => setSearchQuery("")}
+                    aria-label="Limpiar búsqueda"
                   >
-                    <svg
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </button>
-                </div>
+                )}
+              </div>
+              {searchQuery && (
+                <p className="search-results-info">
+                  {filteredProducts.length} producto{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''}
+                </p>
+              )}
+            </div>
 
-                <div className="product-info">
-                  <h3 className="product-name">{product.name}</h3>
-                  <div className="product-category">{product.category}</div>
-                  <div className="product-price">${product.price}.00 MXN</div>
+            {/* Filtros por categoría */}
+            <div className="filter-section">
+              <h3 className="filter-section-title">FILTRAR POR</h3>
+              <div className="category-filters-list">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    className={`category-filter-btn ${
+                      selectedCategory === category ? "category-filter-btn-active" : ""
+                    }`}
+                    onClick={() => setSelectedCategory(category)}
+                    aria-pressed={selectedCategory === category}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-                  <div className="product-actions">
+            {/* Ordenamiento */}
+            <div className="filter-section">
+              <h3 className="filter-section-title">ORDENAR POR</h3>
+              <div className="sort-filters-list">
+                {sortOptions.map((option) => (
+                  <button
+                    key={option}
+                    className={`sort-filter-btn ${
+                      sortBy === option ? "sort-filter-btn-active" : ""
+                    }`}
+                    onClick={() => setSortBy(option)}
+                    aria-pressed={sortBy === option}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        {/* Columna derecha - Productos */}
+        <section className="catalog-products-section">
+          
+          {/* Grid de Productos */}
+          <div className="products-container">
+            <h2 id="products-title" className="sr-only">
+              Productos disponibles
+            </h2>
+            <div className="products-grid">
+              {currentProducts.map((product) => (
+                <article key={product.id} className="product-card">
+                  <div className="product-image-container">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="product-image"
+                    />
+
                     <button
-                      className="add-to-cart-btn"
-                      onClick={() => addToCart(product)}
-                      aria-label={`Agregar ${product.name} al carrito`}
+                      className="product-wishlist"
+                      aria-label={`Agregar ${product.name} a favoritos`}
                     >
                       <svg
                         fill="none"
@@ -1002,55 +1017,84 @@ export default function CatalogoPage() {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth={2}
-                          d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                         />
                       </svg>
-                      AGREGAR AL CARRITO
-                    </button>
-                    <button
-                      className="view-details-btn"
-                      onClick={() => openProductDetail(product)}
-                      aria-label={`Ver detalles de ${product.name}`}
-                    >
-                      VER DETALLES
                     </button>
                   </div>
-                </div>
-              </article>
-            ))}
-          </div>
 
-          {/* Paginación - Solo círculos */}
-          {totalPages > 1 && (
-            <nav
-              className="pagination-simple"
-              aria-label="Paginación de productos"
-            >
-              <div className="pagination-circles">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (number) => (
-                    <button
-                      key={number}
-                      onClick={() => paginate(number)}
-                      className={`pagination-circle ${
-                        currentPageNumber === number
-                          ? "pagination-circle-active"
-                          : ""
-                      }`}
-                      aria-label={`Ir a la página ${number}`}
-                      aria-current={
-                        currentPageNumber === number ? "page" : undefined
-                      }
-                    >
-                      {number}
-                    </button>
-                  )
-                )}
-              </div>
-            </nav>
-          )}
-        </div>
-      </section>
+                  <div className="product-info">
+                    <h3 className="product-name">{product.name}</h3>
+                    <div className="product-category">{product.category}</div>
+                    <div className="product-price">${product.price}.00 MXN</div>
+
+                    <div className="product-actions">
+                      <button
+                        className="add-to-cart-btn"
+                        onClick={() => addToCart(product)}
+                        aria-label={`Agregar ${product.name} al carrito`}
+                      >
+                        <svg
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                          />
+                        </svg>
+                        AGREGAR AL CARRITO
+                      </button>
+                      <button
+                        className="view-details-btn"
+                        onClick={() => openProductDetail(product)}
+                        aria-label={`Ver detalles de ${product.name}`}
+                      >
+                        VER DETALLES
+                      </button>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Paginación - Solo círculos */}
+            {totalPages > 1 && (
+              <nav
+                className="pagination-simple"
+                aria-label="Paginación de productos"
+              >
+                <div className="pagination-circles">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                    (number) => (
+                      <button
+                        key={number}
+                        onClick={() => paginate(number)}
+                        className={`pagination-circle ${
+                          currentPageNumber === number
+                            ? "pagination-circle-active"
+                            : ""
+                        }`}
+                        aria-label={`Ir a la página ${number}`}
+                        aria-current={
+                          currentPageNumber === number ? "page" : undefined
+                        }
+                      >
+                        {number}
+                      </button>
+                    )
+                  )}
+                </div>
+              </nav>
+            )}
+          </div>
+        </section>
+
+      </main>
 
       {/* Footer */}
       <footer className="smart-footer">

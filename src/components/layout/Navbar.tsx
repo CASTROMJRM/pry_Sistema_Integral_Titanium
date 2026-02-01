@@ -44,7 +44,7 @@ const Navbar = ({ scrolled, onToggleMobile }: Props) => {
               <span className="nav-underline" />
             </Link>
 
-            <Link to="/AboutUs" className="nav-link">
+            <Link to="/AboutePage" className="nav-link">
               <FaInfoCircle className="nav-icon" />
               ACERCA DE NOSOTROS
               <span className="nav-underline" />

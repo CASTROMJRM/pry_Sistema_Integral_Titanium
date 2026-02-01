@@ -52,20 +52,6 @@ const slides = [
     description:
       "Nuestro equipo de entrenadores cuenta con certificaciones internacionales y años de experiencia. Cada sesión está diseñada para maximizar resultados, prevenir lesiones y mantenerte motivado en tu camino hacia el éxito.",
   },
-  {
-    label: "Alcanza Tus:",
-    title: "Objetivos Fitness",
-    subtitle: "Resultados Reales Y Medibles",
-    description:
-      "Ya sea ganar músculo, perder grasa o mejorar tu condición física, tenemos el plan perfecto para ti. Programas personalizados, seguimiento continuo y técnicas probadas que garantizan tu progreso constante.",
-  },
-  {
-    label: "Únete a:",
-    title: "La Comunidad Titanium",
-    subtitle: "Más Que Un Gimnasio",
-    description:
-      "Forma parte de una familia que comparte tus objetivos. Eventos exclusivos, clases grupales energéticas y un ambiente de apoyo donde cada logro se celebra. Aquí encontrarás motivación, amistad y resultados.",
-  },
 ];
 
 export default function HomePage() {
