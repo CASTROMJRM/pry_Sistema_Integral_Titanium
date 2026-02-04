@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/AboutUs.css";
 import Footer from "../components/layout/Footer";
-import Navbar from "../components/layout/Navbar";
+import Navbar from "../components/layout/Navbar/Navbar";
 
 // Importa tus imágenes (ajusta las rutas según tu estructura)
 

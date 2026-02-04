@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/home.css";
-import Navbar from "../components/layout/Navbar";
+import Navbar from "../components/layout/Navbar/Navbar";
 import MobileMenu from "../components/layout/MobileMenu";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
 import Footer from "../components/layout/Footer";

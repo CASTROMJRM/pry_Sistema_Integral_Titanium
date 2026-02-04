@@ -12,6 +12,13 @@ import AboutePage from "./pages/AboutePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Error500Page from "./pages/Page500";
 import Error400Page from "./pages/400";
+// Admin
+import AdminLayout from "./components/layout/admin/AdminLayout/AdminLayout";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+
+import AdminProductsPage from "./pages/admin/AdminProductsPage";
+
+import AdminSiteSettingsPage from "./pages/admin/AdminSiteSettingsPage";
 
 export default function App() {
   return (
@@ -31,6 +38,15 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/500" element={<Error500Page />} />
         <Route path="/400" element={<Error400Page />} />
+
+        {/*Admin Dashboard (sin navbar público) */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboardPage />} />
+          <Route path="products" element={<AdminProductsPage />} />
+          <Route path="settings" element={<AdminSiteSettingsPage />} />
+        </Route>
+
+       
       </Routes>
     </BrowserRouter>
   );
