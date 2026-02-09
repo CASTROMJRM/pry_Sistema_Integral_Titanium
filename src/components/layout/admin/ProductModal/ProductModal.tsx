@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "./ProductModal.module.css";
 
 type ProductStatus = "Activo" | "Inactivo";
+type ProductType = "Suplementación" | "Ropa";
 
 export type ProductFormData = {
   name: string;
@@ -10,6 +11,13 @@ export type ProductFormData = {
   stock: number;
   status: ProductStatus;
   image?: string;
+  productType: ProductType;
+  supplementFlavor?: string;
+  supplementPresentation?: string;
+  supplementServings?: string;
+  apparelSize?: string;
+  apparelColor?: string;
+  apparelMaterial?: string;
 };
 
 interface Props {
@@ -22,11 +30,12 @@ interface Props {
 
 const defaultData: ProductFormData = {
   name: "",
-  category: "Proteína",
+  category: "",
   price: 0,
   stock: 0,
   status: "Activo",
   image: "",
+  productType: "Suplementación",
 };
 
 export default function ProductModal({
@@ -45,13 +54,22 @@ export default function ProductModal({
   }, [open, initial]);
 
   const canSave = useMemo(() => {
+    const hasSupplementDetails =
+      data.supplementPresentation?.trim() &&
+      data.supplementFlavor?.trim() &&
+      data.supplementServings?.trim();
+    const hasApparelDetails =
+      data.apparelSize?.trim() && data.apparelColor?.trim();
     return (
       data.name.trim().length >= 3 &&
       data.category.trim().length >= 2 &&
       Number.isFinite(data.price) &&
       data.price > 0 &&
       Number.isFinite(data.stock) &&
-      data.stock >= 0
+      data.stock >= 0 &&
+      (data.productType === "Suplementación"
+        ? Boolean(hasSupplementDetails)
+        : Boolean(hasApparelDetails))
     );
   }, [data]);
 
@@ -72,6 +90,12 @@ export default function ProductModal({
       name: data.name.trim(),
       category: data.category.trim(),
       image: data.image?.trim() || "",
+      supplementFlavor: data.supplementFlavor?.trim() || "",
+      supplementPresentation: data.supplementPresentation?.trim() || "",
+      supplementServings: data.supplementServings?.trim() || "",
+      apparelSize: data.apparelSize?.trim() || "",
+      apparelColor: data.apparelColor?.trim() || "",
+      apparelMaterial: data.apparelMaterial?.trim() || "",
     });
   };
 
@@ -99,6 +123,39 @@ export default function ProductModal({
 
         <div className={styles.body}>
           <div className={styles.grid}>
+            <label className={`${styles.field} ${styles.span2}`}>
+              <span>Tipo de producto</span>
+              <select
+                value={data.productType}
+                onChange={(e) =>
+                  setData((p) => ({
+                    ...p,
+                    productType: e.target.value as ProductType,
+                    supplementFlavor:
+                      e.target.value === "Suplementación"
+                        ? p.supplementFlavor
+                        : "",
+                    supplementPresentation:
+                      e.target.value === "Suplementación"
+                        ? p.supplementPresentation
+                        : "",
+                    supplementServings:
+                      e.target.value === "Suplementación"
+                        ? p.supplementServings
+                        : "",
+                    apparelSize: e.target.value === "Ropa" ? p.apparelSize : "",
+                    apparelColor:
+                      e.target.value === "Ropa" ? p.apparelColor : "",
+                    apparelMaterial:
+                      e.target.value === "Ropa" ? p.apparelMaterial : "",
+                  }))
+                }
+              >
+                <option value="Suplementación">Suplementación</option>
+                <option value="Ropa">Ropa</option>
+              </select>
+            </label>
+
             <label className={styles.field}>
               <span>Nombre</span>
               <input
@@ -117,42 +174,106 @@ export default function ProductModal({
                 onChange={(e) =>
                   setData((p) => ({ ...p, category: e.target.value }))
                 }
-                placeholder="Ej. Proteína / Creatina / Pre-entreno"
-              />
-            </label>
-
-            <label className={styles.field}>
-              <span>Precio (MXN)</span>
-              <input
-                type="number"
-                min={0}
-                step="0.01"
-                value={data.price}
-                onChange={(e) =>
-                  setData((p) => ({ ...p, price: Number(e.target.value) }))
+                placeholder={
+                  data.productType === "Suplementación"
+                    ? "Ej. Proteína / Creatina / Pre-entreno"
+                    : "Ej. Playera / Leggings / Sudadera"
                 }
               />
             </label>
 
-            <label className={styles.field}>
-              <span>Stock</span>
-              <input
-                type="number"
-                min={0}
-                step="1"
-                value={data.stock}
-                onChange={(e) =>
-                  setData((p) => ({ ...p, stock: Number(e.target.value) }))
-                }
-              />
-            </label>
+            {data.productType === "Suplementación" ? (
+              <>
+                <label className={styles.field}>
+                  <span>Presentación</span>
+                  <input
+                    value={data.supplementPresentation || ""}
+                    onChange={(e) =>
+                      setData((p) => ({
+                        ...p,
+                        supplementPresentation: e.target.value,
+                      }))
+                    }
+                    placeholder="Ej. 900 g / 1.8 kg"
+                  />
+                </label>
 
+                <label className={styles.field}>
+                  <span>Sabor</span>
+                  <input
+                    value={data.supplementFlavor || ""}
+                    onChange={(e) =>
+                      setData((p) => ({
+                        ...p,
+                        supplementFlavor: e.target.value,
+                      }))
+                    }
+                    placeholder="Ej. Chocolate / Vainilla"
+                  />
+                </label>
+
+                <label className={styles.field}>
+                  <span>Porciones</span>
+                  <input
+                    value={data.supplementServings || ""}
+                    onChange={(e) =>
+                      setData((p) => ({
+                        ...p,
+                        supplementServings: e.target.value,
+                      }))
+                    }
+                    placeholder="Ej. 30 servicios"
+                  />
+                </label>
+              </>
+            ) : (
+              <>
+                <label className={styles.field}>
+                  <span>Talla</span>
+                  <input
+                    value={data.apparelSize || ""}
+                    onChange={(e) =>
+                      setData((p) => ({ ...p, apparelSize: e.target.value }))
+                    }
+                    placeholder="Ej. CH / M / G"
+                  />
+                </label>
+
+                <label className={styles.field}>
+                  <span>Color</span>
+                  <input
+                    value={data.apparelColor || ""}
+                    onChange={(e) =>
+                      setData((p) => ({ ...p, apparelColor: e.target.value }))
+                    }
+                    placeholder="Ej. Negro / Azul"
+                  />
+                </label>
+
+                <label className={styles.field}>
+                  <span>Material</span>
+                  <input
+                    value={data.apparelMaterial || ""}
+                    onChange={(e) =>
+                      setData((p) => ({
+                        ...p,
+                        apparelMaterial: e.target.value,
+                      }))
+                    }
+                    placeholder="Ej. Algodón / Dry-fit"
+                  />
+                </label>
+              </>
+            )}
             <label className={styles.field}>
               <span>Estado</span>
               <select
                 value={data.status}
                 onChange={(e) =>
-                  setData((p) => ({ ...p, status: e.target.value as any }))
+                  setData((p) => ({
+                    ...p,
+                    status: e.target.value as ProductStatus,
+                  }))
                 }
               >
                 <option value="Activo">Activo</option>

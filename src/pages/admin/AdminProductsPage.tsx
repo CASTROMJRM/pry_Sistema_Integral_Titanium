@@ -12,6 +12,13 @@ type Product = {
   stock: number;
   status: ProductStatus;
   image?: string;
+  productType: "Suplementación" | "Ropa";
+  supplementFlavor?: string;
+  supplementPresentation?: string;
+  supplementServings?: string;
+  apparelSize?: string;
+  apparelColor?: string;
+  apparelMaterial?: string;
 };
 
 const initialProducts: Product[] = [
@@ -23,6 +30,10 @@ const initialProducts: Product[] = [
     stock: 12,
     status: "Activo",
     image: "https://via.placeholder.com/52",
+    productType: "Suplementación",
+    supplementFlavor: "Vainilla",
+    supplementPresentation: "2.2 kg",
+    supplementServings: "73 servicios",
   },
   {
     id: "P-002",
@@ -32,6 +43,10 @@ const initialProducts: Product[] = [
     stock: 8,
     status: "Activo",
     image: "https://via.placeholder.com/52",
+    productType: "Suplementación",
+    supplementFlavor: "Sin sabor",
+    supplementPresentation: "300 g",
+    supplementServings: "60 servicios",
   },
   {
     id: "P-003",
@@ -41,6 +56,10 @@ const initialProducts: Product[] = [
     stock: 0,
     status: "Inactivo",
     image: "https://via.placeholder.com/52",
+    productType: "Suplementación",
+    supplementFlavor: "Frutos rojos",
+    supplementPresentation: "360 g",
+    supplementServings: "30 servicios",
   },
 ];
 
@@ -260,6 +279,13 @@ export default function AdminProductsPage() {
             image: data.image?.trim()
               ? data.image.trim()
               : "https://via.placeholder.com/52",
+            productType: data.productType,
+            supplementFlavor: data.supplementFlavor,
+            supplementPresentation: data.supplementPresentation,
+            supplementServings: data.supplementServings,
+            apparelSize: data.apparelSize,
+            apparelColor: data.apparelColor,
+            apparelMaterial: data.apparelMaterial,
           };
 
           setProducts((prev) => [newProduct, ...prev]);

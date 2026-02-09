@@ -9,7 +9,7 @@
 }
 
 .modal {
-  width: min(740px, 100%);
+  width: min(820px, 100%);
   background: white;
   border-radius: 18px;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -30,6 +30,7 @@
   margin: 0;
   font-size: 18px;
 }
+
 .subtitle {
   margin: 6px 0 0;
   color: #666;
@@ -56,10 +57,6 @@
   gap: 12px;
 }
 
-.span2 {
-  grid-column: span 2;
-}
-
 .field {
   display: flex;
   flex-direction: column;
@@ -69,18 +66,33 @@
   color: #444;
 }
 
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
+.field input,
+.field select,
+.field textarea {
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 10px 12px;
+  outline: none;
+  font-weight: 600;
+  font-family: inherit;
+}
+
 .field input,
 .field select {
   height: 40px;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  padding: 0 12px;
-  outline: none;
-  font-weight: 600;
+}
+
+.field textarea {
+  resize: vertical;
 }
 
 .field input:focus,
-.field select:focus {
+.field select:focus,
+.field textarea:focus {
   border-color: rgba(239, 68, 68, 0.35);
 }
 
@@ -88,15 +100,24 @@
   margin-top: 14px;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  padding: 10px;
+  padding: 12px;
   background: rgba(0, 0, 0, 0.02);
 }
 
-.preview img {
-  width: 100%;
-  max-height: 260px;
-  object-fit: contain;
-  display: block;
+.previewTitle {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #333;
+}
+
+.featureList {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: #444;
+  font-size: 13px;
 }
 
 .footer {
@@ -136,5 +157,9 @@
 @media (max-width: 640px) {
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .fieldFull {
+    grid-column: auto;
   }
 }

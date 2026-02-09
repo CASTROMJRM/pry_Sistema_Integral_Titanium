@@ -20,6 +20,8 @@ import AdminProductsPage from "./pages/admin/AdminProductsPage";
 
 import AdminSiteSettingsPage from "./pages/admin/AdminSiteSettingsPage";
 
+import AdminSuscripcionesPage from "./pages/admin/AdminSuscripcionesPage";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -43,10 +45,9 @@ export default function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminDashboardPage />} />
           <Route path="products" element={<AdminProductsPage />} />
+          <Route path="suscripciones" element={<AdminSuscripcionesPage />} />
           <Route path="settings" element={<AdminSiteSettingsPage />} />
         </Route>
-
-       
       </Routes>
     </BrowserRouter>
   );

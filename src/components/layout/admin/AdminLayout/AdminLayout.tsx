@@ -9,7 +9,7 @@ export default function AdminLayout() {
       <aside className={styles.sidebar}>
         <AdminSidebar />
       </aside>
-
+      
       <main className={styles.main}>
         <AdminTopbar />
         <div className={styles.content}>
