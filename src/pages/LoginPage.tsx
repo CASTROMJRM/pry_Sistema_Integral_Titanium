@@ -1,18 +1,54 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, type FormEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 import Logo from "../assets/LogoP.png";
+import { saveMockSession, type UserRole } from "../auth/mockSession";
+import { MOCK_USERS } from "../auth/mockUsers";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const roleRouteMap: Record<UserRole, string> = {
+    cliente: "/cliente",
+    entrenador: "/entrenador",
+    admin: "/admin",
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+    const matchedUser = MOCK_USERS.find(
+      (user) =>
+        user.email.toLowerCase() === normalizedEmail &&
+        user.password === password,
+    );
+
+    if (!matchedUser) {
+      setErrorMessage(
+        "Usuario no encontrado en modo temporal. Prueba con cliente@titanium.com, entrenador@titanium.com o admin@titanium.com (clave: 123456).",
+      );
+      return;
+    }
+
+    setErrorMessage("");
+    saveMockSession({ email: matchedUser.email, role: matchedUser.role });
+    setPassword("");
+
+    navigate(roleRouteMap[matchedUser.role]);
+  };
 
   return (
     <div className="auth-layout">
@@ -156,7 +192,7 @@ export default function LoginPage() {
                 Accede a tu cuenta de Titanium Sport Gym
               </p>
 
-              <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+              <form className="auth-form" onSubmit={handleSubmit}>
                 {/* Email */}
                 <div className="auth-input-group">
                   <label className="auth-label" htmlFor="email">
@@ -181,6 +217,8 @@ export default function LoginPage() {
                       placeholder="tu@email.com"
                       className="auth-input"
                       autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </div>
@@ -220,6 +258,8 @@ export default function LoginPage() {
                       placeholder="••••••••"
                       className="auth-input"
                       autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                     <button
@@ -272,6 +312,21 @@ export default function LoginPage() {
                     </button>
                   </div>
                 </div>
+                <p className="auth-subtitle" style={{ marginTop: "0.5rem" }}>
+                  Modo temporal: el rol se asigna automáticamente por correo.
+                </p>
+
+                {errorMessage && (
+                  <p
+                    style={{
+                      color: "#ff6b6b",
+                      fontSize: "0.9rem",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    {errorMessage}
+                  </p>
+                )}
 
                 {/* Row: remember + forgot */}
                 <div className="auth-row">
@@ -285,9 +340,9 @@ export default function LoginPage() {
                   </a>
                 </div>
 
-                <Link to="/#" style={{ textDecoration: "none" }}>
-                  <button className="auth-btn-primary">Iniciar Sesión</button>
-                </Link>
+                <button className="auth-btn-primary" type="submit">
+                  Iniciar Sesión
+                </button>
 
                 {/* Footer link */}
                 <p className="auth-footer">

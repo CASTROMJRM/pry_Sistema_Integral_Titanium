@@ -12,6 +12,9 @@ import AboutePage from "./pages/AboutePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Error500Page from "./pages/Page500";
 import Error400Page from "./pages/400";
+
+import ClienteHomePage from "./pages/ClienteHomePage";
+import EntrenadorHomePage from "./pages/EntrenadorHomePage";
 // Admin
 import AdminLayout from "./components/layout/admin/AdminLayout/AdminLayout";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
@@ -25,6 +28,8 @@ import ClientDashboardPage from "./pages/client/ClientDashboardPage";
 import ClientProfilePage from "./pages/client/ClientProfilePage";
 import ClientSubscriptionPage from "./pages/client/ClientSubscriptionPage";
 import ClientPaymentsPage from "./pages/client/ClientPaymentsPage";
+
+import RoleRoute from "./components/auth/RoleRoute";
 
 export default function App() {
   return (
@@ -45,12 +50,22 @@ export default function App() {
         <Route path="/500" element={<Error500Page />} />
         <Route path="/400" element={<Error400Page />} />
 
+        <Route element={<RoleRoute allowedRoles={["cliente"]} />}>
+          <Route path="/cliente" element={<ClienteHomePage />} />
+        </Route>
+
+        <Route element={<RoleRoute allowedRoles={["entrenador"]} />}>
+          <Route path="/entrenador" element={<EntrenadorHomePage />} />
+        </Route>
+
         {/*Admin Dashboard (sin navbar público) */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminDashboardPage />} />
-          <Route path="products" element={<AdminProductsPage />} />
-          <Route path="suscripciones" element={<AdminSuscripcionesPage />} />
-          <Route path="settings" element={<AdminSiteSettingsPage />} />
+        <Route element={<RoleRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="products" element={<AdminProductsPage />} />
+            <Route path="suscripciones" element={<AdminSuscripcionesPage />} />
+            <Route path="settings" element={<AdminSiteSettingsPage />} />
+          </Route>
         </Route>
 
         {/* Client Portal */}
@@ -60,7 +75,6 @@ export default function App() {
           <Route path="suscripcion" element={<ClientSubscriptionPage />} />
           <Route path="pagos" element={<ClientPaymentsPage />} />
         </Route>
-        
       </Routes>
     </BrowserRouter>
   );
