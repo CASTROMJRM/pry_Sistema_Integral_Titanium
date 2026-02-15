@@ -15,12 +15,16 @@ import Error400Page from "./pages/400";
 // Admin
 import AdminLayout from "./components/layout/admin/AdminLayout/AdminLayout";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
-
 import AdminProductsPage from "./pages/admin/AdminProductsPage";
-
 import AdminSiteSettingsPage from "./pages/admin/AdminSiteSettingsPage";
-
 import AdminSuscripcionesPage from "./pages/admin/AdminSuscripcionesPage";
+
+// Client Portal
+import ClientPortalLayout from "./components/layout/client/ClientPortalLayout/ClientPortalLayout";
+import ClientDashboardPage from "./pages/client/ClientDashboardPage";
+import ClientProfilePage from "./pages/client/ClientProfilePage";
+import ClientSubscriptionPage from "./pages/client/ClientSubscriptionPage";
+import ClientPaymentsPage from "./pages/client/ClientPaymentsPage";
 
 export default function App() {
   return (
@@ -48,6 +52,15 @@ export default function App() {
           <Route path="suscripciones" element={<AdminSuscripcionesPage />} />
           <Route path="settings" element={<AdminSiteSettingsPage />} />
         </Route>
+
+        {/* Client Portal */}
+        <Route path="/cliente" element={<ClientPortalLayout />}>
+          <Route index element={<ClientDashboardPage />} />
+          <Route path="perfil" element={<ClientProfilePage />} />
+          <Route path="suscripcion" element={<ClientSubscriptionPage />} />
+          <Route path="pagos" element={<ClientPaymentsPage />} />
+        </Route>
+        
       </Routes>
     </BrowserRouter>
   );

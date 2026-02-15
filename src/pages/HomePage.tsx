@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/home.css";
 import Navbar from "../components/layout/Navbar/Navbar";
 import MobileMenu from "../components/layout/MobileMenu";
 import Breadcrumbs from "../components/layout/Breadcrumbs";
 import Footer from "../components/layout/Footer";
-import Logo from "../assets/LogoP.png";
-import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -94,26 +92,14 @@ export default function HomePage() {
       </div>
 
       {/* Header */}
-      <header className={`header ${scrolled ? "header-scrolled" : ""}`}>
-        <div className="header-content">
-          <div className="logo-container">
-            <Link to="/">
-              <img src={Logo} alt="Titanium Sport Gym" className="logo-image" />
-            </Link>
-          </div>
+      <Navbar
+        scrolled={scrolled}
+        onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)}
+      />
 
-          {/* USAMOS EN  COMPONENTE NAVBAR*/}
-          <Navbar
-            scrolled={scrolled}
-            onToggleMobile={() => setMobileMenuOpen(!mobileMenuOpen)}
-          />
-        </div>
-
-        {/* MOBILE MENU */}
-        {mobileMenuOpen && (
-          <MobileMenu onClose={() => setMobileMenuOpen(false)} />
-        )}
-      </header>
+      {mobileMenuOpen && (
+        <MobileMenu onClose={() => setMobileMenuOpen(false)} />
+      )}
 
       <Breadcrumbs currentPage="Inicio" />
 
