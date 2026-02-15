@@ -15,7 +15,7 @@ export default function AdminTopbar({
   return (
     <header className={styles.topbar}>
       <div className={styles.left}>
-        {/* 👇 BRAND CON IMAGEN */}
+        {/*BRAND CON IMAGEN */}
         <div className={styles.brand}>
           <img src={Logo} alt="Titanium" className={styles.brandLogo} />
         </div>
