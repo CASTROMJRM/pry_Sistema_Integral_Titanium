@@ -64,7 +64,34 @@
   align-items: center;
   gap: 1rem;
 }
+/* EstilosCarrito de compras */
+.cartLink {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--primary, #ef4444);
+  color: var(--primary, #ef4444);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all var(--t, 0.3s ease);
+}
 
+.cartLink:hover {
+  background: var(--primary-hover, #dc2626);
+  border-color: var(--primary-hover, #dc2626);
+  color: var(--white, #fff);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+.cartLink svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Aqui terminas los estilos de carritos de compras */
 .navDivider {
   width: 1px;
   height: 24px;

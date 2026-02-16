@@ -7,6 +7,7 @@ import {
   FaDumbbell,
   FaIdCard,
   FaInfoCircle,
+  FaShoppingCart,
   FaUserPlus,
   FaSignInAlt,
 } from "react-icons/fa";
@@ -81,7 +82,13 @@ const Navbar = ({ scrolled, onToggleMobile }: Props) => {
           </div>
 
           <div className={styles.navActionLinks}>
-            {/* SE ELIMINÓ ESTA LÍNEA: <div className={styles.navDivider} /> */}
+            <Link
+              to="/catalogue"
+              className={styles.cartLink}
+              aria-label="Carrito de compras"
+            >
+              <FaShoppingCart />
+            </Link>
             <Link to="/register" className={styles.btnOutline}>
               <FaUserPlus /> SUSCRÍBETE
             </Link>
